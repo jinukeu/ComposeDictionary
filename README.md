@@ -54,13 +54,13 @@ https://developermemos.com/posts/checking-composable-render-preview
 https://sungbin.land/jetpack-compose-%EC%9A%B0%EB%A6%AC%EA%B0%80-%EB%AA%B0%EB%9E%90%EB%8D%98-compositionlocal-%EB%93%A4-343b1ea41e3a
 
 ## CompositionLocal
-![image](https://github.com/jinukeu/ComposeDictionary/assets/81678959/405ec9d6-21f3-4079-99b0-99b3844bd2c8)   
+![image](https://github.com/jinukeu/ComposeDictionary/assets/81678959/566b0ba1-cceb-4463-938a-87198a862226)
 
 colorState는 Composable1에 정의되어 있으며 Composable8에서만 이용된다.
 
 사용하지 않는 Composable3, 5에도 colorState가 전달된다.
 
-![image](https://github.com/jinukeu/ComposeDictionary/assets/81678959/60b842d9-30d2-475c-86c1-35c0413ca740)
+![image](https://github.com/jinukeu/ComposeDictionary/assets/81678959/b3083e87-e32b-4bf3-9248-4ca8121a5d61)
 
 하지만 `CompositioniLocal`을 이용하면 중간 자식 노드에 상태를 전달하지 않고도 트리의 가장 높은 노드에 선언되어 있는 데이터를 하위 노드에서 이용할 수 있다.
 
