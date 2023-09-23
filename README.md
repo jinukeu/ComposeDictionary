@@ -34,4 +34,47 @@ Stable이 필요한 이유는 Smart Recomposition 때문이다. Smart Recomposit
 
 https://velog.io/@nilto/Android-Jetpack-Compose-Compose-Stable
 
+## LocalInspectionMode
+안드로이드 스튜디오 Preview 로 보이고 있는지 Boolean 값을 제공   
+
+```kotlin
+@Composable
+fun ExampleView(
+    isPreview: Boolean = LocalInspectionMode.current
+) {
+    if (isPreview) {
+        Text("This is a preview")
+    } else {
+        Text("This is not")
+    }
+}
+```
+
+https://developermemos.com/posts/checking-composable-render-preview   
+https://sungbin.land/jetpack-compose-%EC%9A%B0%EB%A6%AC%EA%B0%80-%EB%AA%B0%EB%9E%90%EB%8D%98-compositionlocal-%EB%93%A4-343b1ea41e3a
+
+## CompositionLocal
+![image](https://github.com/jinukeu/ComposeDictionary/assets/81678959/405ec9d6-21f3-4079-99b0-99b3844bd2c8)   
+
+colorState는 Composable1에 정의되어 있으며 Composable8에서만 이용된다.
+
+사용하지 않는 Composable3, 5에도 colorState가 전달된다.
+
+![image](https://github.com/jinukeu/ComposeDictionary/assets/81678959/60b842d9-30d2-475c-86c1-35c0413ca740)
+
+하지만 `CompositioniLocal`을 이용하면 중간 자식 노드에 상태를 전달하지 않고도 트리의 가장 높은 노드에 선언되어 있는 데이터를 하위 노드에서 이용할 수 있다.
+
+### CompositionLocal 이용하기
+ProvidableCompositionalLocal 인스턴스를 생성해야 한다.
+```kotlin
+val LocalColor = compositionLocalOf { Color.Red }
+val LocalColor = staticCompositionLocalOf { Color.Red }
+```
+
+`staticCompositionLocalOf` : 상탯값이 변경되면 해당 상태가 할당된 노드의 하위 노드를 모두 재구성     
+
+`compositionLocalOf` : 현재 상태에 접근하는 컴포저블에 대해서만 재구성을 수행   
+
+`staticCompositionLocalOf`은 Compose가 추적하지 않기 때문에 상탯값이 자주 변경되지 않을 때 사용하면 성능이 좋다고 한다.   
+
 
