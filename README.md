@@ -78,3 +78,12 @@ val LocalColor = staticCompositionLocalOf { Color.Red }
 `staticCompositionLocalOf`은 Compose가 추적하지 않기 때문에 상탯값이 자주 변경되지 않을 때 사용하면 성능이 좋다고 한다.   
 
 
+## Shape
+Shape는 컴포저블을 특정 모양으로 그리는 데 사용할 수 있습니다.
+
+https://foso.github.io/Jetpack-Compose-Playground/foundation/shape/
+
+## Box
+프레임 레이아웃처럼 여러 뷰들을 겹칠 수 있는 용도로 쓸 수 있다.
+
+https://onlyfor-me-blog.tistory.com/688
