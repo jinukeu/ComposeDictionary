@@ -87,3 +87,57 @@ https://foso.github.io/Jetpack-Compose-Playground/foundation/shape/
 프레임 레이아웃처럼 여러 뷰들을 겹칠 수 있는 용도로 쓸 수 있다.
 
 https://onlyfor-me-blog.tistory.com/688
+
+## hiltViewModel
+hiltViewModel()로 생성된 viewModel은 NavBackStackEntry의 스코프를 가지게된다. Compose Navigation과 함께 사용할 때 유용하다.
+
+https://velog.io/@wlsrhkd4023/Compose-hiltViewModel%EA%B3%BC-viewModel-%EC%B0%A8%EC%9D%B4#viewmodel-%EC%83%9D%EC%84%B1
+
+## LaunchedEffect
+LaunchedEffect는 Composable에서 컴포지션이 일어날 때 suspend fun을 실행해주는 Composable이다.
+
+리컴포지션은 Composable의 State가 바뀔 때마다 일어나므로, 만약 매번 리컴포지션이 일어날 때마다 이전 LaunchedEffect가 취소되고 다시 수행된다면 매우 비효율적일 것이다. 이를 해결하기 위해 LaunchedEffect는 key라 불리는 기준값을 두어 key가 바뀔 때만 LaunchedEffect의 suspend fun을 취소하고 재실행한다.
+
+https://kotlinworld.com/246
+
+## collectAsStateWithLifecycle
+collectAsState는 Composition의 라이프사이클을 따르고, composable이 Composition 단계에 진입할 때 flow를 수집하기 시작합니다. collectAsState는 Android앱이 백그라운드에 있는 동안 recomposition을 중지하더라고 수집 작업이 활성화된 상태로 유지하기 때문에 나머지 레이어에 대한 리소스를 확보할 수 없으며, collectAsState는 flow를 수집하는데 플랫폼에 구애받지 않는 API라고 합니다.  
+
+ 
+
+하지만 Android앱에서 라이프사이클은 리소스를 관리하는 방법에서 중요한 역할을 맡고 있기 때문에 앱이 백그라운드에 있는 동안 flow 수집 활동을 중지할 수 있는 collectAsStateWithLifecycle를 사용한다면, 안전하고 불필요한 리소스 낭비를 방지할 수 있다고 합니다.
+
+두 가지 API 모두 Compose에서 사용하지만, collectAsStateWithLifecycle은 Android 앱을 개발할 때, collectAsState는 다른 플랫폼을 위해 개발할 때 사용하는 것이 좋다고 합니다.
+
+https://reco-dy.tistory.com/13
+
+## State
+Jetpack Compose에서 상태(State)란 UI의 업데이트와 관련있다. 상태 값이 변경될 때 마다 UI가 업데이트되기 때문이다.
+
+상태 값은 어떤 타입이든 될 수 있다. Boolean, String 같은 단순한 값일 수도 있고, 렌더링된 화면 상태에 대한 여러 값을 포함한 data class 일 수도 있다.
+
+컴포즈가 상태 변경을 인식하기 위해서는 상태 값을 mutableStateOf()를 사용해서 State Object로 감싸면 된다. mutableStateOf() 함수는 `MutableState<T>` 객체를 리턴하고, 컴포즈는 값이 변경될 때마다 변경 사항을 추적해서 UI를 업데이트한다.
+
+### State를 만드는 방법
+```kotlin
+@Composable
+fun MyComponent() {
+    var enabled by remember { mutableStateOf(true) } // <- this line
+
+    // ...
+    Text("Enabled is ${enabled}")
+}
+```
+
+```kotlin
+val flow = MutableStateFlow("")
+// ...
+val state by flow.collectAsState()
+
+// for lifecycle aware version
+val state by flow.collectAsStateWithLifecycle()
+```
+
+https://m1nzi.tistory.com/8
+
+## 
